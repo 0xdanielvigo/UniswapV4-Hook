@@ -35,4 +35,4 @@ This project implements a custom Uniswap V4 hook that rewards users who trade to
 
 3. Run tests
 	```bash
-	forge test
+	make test
