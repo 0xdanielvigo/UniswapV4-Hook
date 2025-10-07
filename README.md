@@ -1,66 +1,38 @@
-## Foundry
+# Uniswap V4 Hook for Reward Distribution
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This project implements a custom Uniswap V4 hook that rewards users who trade tokens from ETH to the protocol token. The rewards are distributed in the form of a dedicated rewards token, incentivizing users to participate in the protocol.
 
-Foundry consists of:
+## Features
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- **Custom Hook Integration**: Leverages Uniswap V4's hook functionality to execute custom logic during swaps.
+- **Reward Distribution**: Automatically assigns rewards to users based on the amount of ETH traded for the protocol token.
+- **Protocol Token Support**: Ensures trades involve the designated protocol token and ETH.
 
-## Documentation
+## Components
 
-https://book.getfoundry.sh/
+- **`Hook.sol`**: Implements the custom Uniswap V4 hook logic, including reward distribution after swaps.
+- **`RewardsDistributor.sol`**: Manages the distribution of rewards tokens to users.
+- **`RewardsToken.sol`**: The ERC-20 token used as the reward currency.
+- **`ProtocolToken.sol`**: The designated protocol token involved in trades.
 
-## Usage
+## How It Works
 
-### Build
+1. **Pool Creation**: A Uniswap V4 pool is created with ETH and the protocol token.
+2. **Swap Monitoring**: The custom hook monitors swaps in the pool.
+3. **Reward Assignment**: After each swap from ETH to the protocol token, the user is rewarded with a proportional amount of rewards tokens.
+4. **Reward Distribution**: The `RewardsDistributor` contract handles the minting and distribution of rewards tokens.
 
-```shell
-$ forge build
-```
+## Getting Started
 
-### Test
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/uniswapv4-hook.git
+   cd uniswapv4-hook
 
-```shell
-$ forge test
-```
+2. Install dependencies
+	```bash
+	forge install
 
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+3. Run tests
+	```bash
+	forge test
