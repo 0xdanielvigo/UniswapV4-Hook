@@ -68,7 +68,7 @@ contract Hook is BaseHook, Ownable {
         address sender, 
         PoolKey calldata key, 
         uint160 sqrtPriceX96
-    ) internal override returns(bytes4) {
+    ) internal view override returns(bytes4) {
         //Check that the pool contains the protocol token
         if (Currency.unwrap(key.currency0) != address(protocolToken) && Currency.unwrap(key.currency1) != address(protocolToken)) {
                 revert NotTheProtocolToken(Currency.unwrap(key.currency0), Currency.unwrap(key.currency1)); 
